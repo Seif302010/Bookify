@@ -8,3 +8,7 @@
 *.dll
 *.exe
 *.pdb
+#Files
+*.jpg
+!no-book.jpg
+*.png
