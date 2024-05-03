@@ -10,7 +10,7 @@ namespace Bookify.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        private List<string> _allowedExtension = new() { ".jpeg", ".jpg", ".png" };
+        private List<string> _allowedExtensions = new() { ".jpeg", ".jpg", ".png" };
         private int _maxAlowedSize = 2097152;
         private readonly IMapper _mapper;
         public BooksController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment, IMapper mapper)
@@ -42,7 +42,7 @@ namespace Bookify.Controllers
             if (model.Image is not null)
             {
                 var extension = Path.GetExtension(model.Image.FileName);
-                if (!_allowedExtension.Contains(extension))
+                if (!_allowedExtensions.Contains(extension))
                 {
                     ModelState.AddModelError(nameof(model.Image), Errors.AllowedExt);
                     return View("Form", model);
@@ -99,7 +99,7 @@ namespace Bookify.Controllers
                         System.IO.File.Delete(oldPath);
                 }
                 var extension = Path.GetExtension(model.Image.FileName);
-                if (!_allowedExtension.Contains(extension))
+                if (!_allowedExtensions.Contains(extension))
                 {
                     ModelState.AddModelError(nameof(model.Image), Errors.AllowedExt);
                     return View("Form", model);
