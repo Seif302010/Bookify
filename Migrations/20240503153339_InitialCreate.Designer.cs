@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bookify.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240503122831_InitialCreate")]
+    [Migration("20240503153339_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,22 +54,7 @@ namespace Bookify.Migrations
                     b.ToTable("Authors");
                 });
 
-            modelBuilder.Entity("Bookify.Core.Models.BookCategory", b =>
-                {
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.HasKey("BookId", "CategoryId");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("BookCategories");
-                });
-
-            modelBuilder.Entity("Bookify.Core.Models.Books", b =>
+            modelBuilder.Entity("Bookify.Core.Models.Book", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -125,6 +110,21 @@ namespace Bookify.Migrations
                         .IsUnique();
 
                     b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("Bookify.Core.Models.BookCategory", b =>
+                {
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BookId", "CategoryId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("BookCategories");
                 });
 
             modelBuilder.Entity("Bookify.Core.Models.Category", b =>
@@ -359,9 +359,20 @@ namespace Bookify.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Bookify.Core.Models.Book", b =>
+                {
+                    b.HasOne("Bookify.Core.Models.Author", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+                });
+
             modelBuilder.Entity("Bookify.Core.Models.BookCategory", b =>
                 {
-                    b.HasOne("Bookify.Core.Models.Books", "Book")
+                    b.HasOne("Bookify.Core.Models.Book", "Book")
                         .WithMany("Categories")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -376,17 +387,6 @@ namespace Bookify.Migrations
                     b.Navigation("Book");
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("Bookify.Core.Models.Books", b =>
-                {
-                    b.HasOne("Bookify.Core.Models.Author", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -440,7 +440,7 @@ namespace Bookify.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Bookify.Core.Models.Books", b =>
+            modelBuilder.Entity("Bookify.Core.Models.Book", b =>
                 {
                     b.Navigation("Categories");
                 });

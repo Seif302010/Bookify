@@ -38,7 +38,7 @@ namespace Bookify.Controllers
             {
                 return View("Form", PopulateViewModel(model));
             }
-            var book = _mapper.Map<Books>(model);
+            var book = _mapper.Map<Book>(model);
             if (model.Image is not null)
             {
                 var extension = Path.GetExtension(model.Image.FileName);
