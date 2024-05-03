@@ -101,7 +101,7 @@
                 <div class="col-md-4">
                     <div class="mb-5">
                         <div>
-                            <img src="~/images/books/@(Model.ImageUrl is null ? "no-book.jpg" : Model.ImageUrl)"
+                            <img src="~/@(Model.ImageUrl is null ? "assets/images/no-book.jpg" : "images/books/" + Model.ImageUrl)"
                                 class="img-thumbnail" id="imgPreview" style="height:250px;" />
                         </div>
                         <div class="form-floating mb-2">
