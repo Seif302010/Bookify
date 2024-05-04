@@ -3,7 +3,6 @@
     [Index(nameof(Title), nameof(AuthorId), IsUnique = true)]
     public class Book : BaseModel
     {
-        public int Id { get; set; }
         [MaxLength(500)]
         public string Title { get; set; } = null!;
 
