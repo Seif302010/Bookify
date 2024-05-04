@@ -27,7 +27,6 @@ namespace Bookify.Controllers
 
         public IActionResult Create()
         {
-
             return View("Form", PopulateViewModel());
         }
 
