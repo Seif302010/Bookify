@@ -109,11 +109,6 @@ $(document).ready(function () {
     showSuccessMessage(message);
   }
 
-  //DataTables
-  KTUtil.onDOMContentLoaded(function () {
-    KTDatatables.init();
-  });
-
   //Handle bootstrap modal
   $("body").delegate(".js-render-modal", "click", function () {
     var btn = $(this);
