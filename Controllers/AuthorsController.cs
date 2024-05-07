@@ -14,7 +14,6 @@
             {
                 Id = c.Id,
                 Name = c.Name,
-                IsDeleted = c.IsDeleted,
                 CreatedOn = c.CreatedOn,
                 LastUpdateOn = c.LastUpdateOn,
             }).AsNoTracking().ToList();
@@ -27,7 +26,7 @@
             return View("Form");
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult Create(AuthorFormViewModel model)
+        public IActionResult Create(UnifiedFormViewModel model)
         {
             if (!ModelState.IsValid)
                 return View("Form", model);
@@ -42,11 +41,10 @@
         {
             var Author = _context.Authors.Find(id);
 
-
             if (Author is null)
                 return NotFound();
 
-            var viewmodel = new AuthorFormViewModel
+            var viewmodel = new UnifiedFormViewModel
             {
                 Id = id,
                 Name = Author.Name!
@@ -55,19 +53,18 @@
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult Edit(AuthorFormViewModel model)
+        public IActionResult Edit(UnifiedFormViewModel model)
         {
             if (!ModelState.IsValid)
                 return View("Form", model);
 
-            var Author = _context.Authors.Find(model.Id);
+            var author = _context.Authors.Find(model.Id);
 
-
-            if (Author is null)
+            if (author is null)
                 return NotFound();
 
-            Author.Name = model.Name;
-            Author.LastUpdateOn = DateTime.Now;
+            author.Name = model.Name;
+            author.LastUpdateOn = DateTime.Now;
 
             _context.SaveChanges();
 
@@ -85,11 +82,10 @@
             _context.SaveChanges();
             return Ok();
         }
-        public IActionResult Allowitem(AuthorFormViewModel model)
+        public IActionResult Allowitem(UnifiedFormViewModel model)
         {
             var isExists = _context.Authors.Any(c => c.Name == model.Name);
             return Json(!isExists);
         }
-
     }
 }

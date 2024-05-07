@@ -133,8 +133,8 @@ namespace Bookify.Controllers
         private BookFormViewModel PopulateViewModel(BookFormViewModel? model = null)
         {
             BookFormViewModel viewModel = model is null ? new BookFormViewModel() : model;
-            var authors = _context.Authors.Where(a => !a.IsDeleted).OrderBy(a => a.Name).ToList();
-            var categories = _context.Categories.Where(a => !a.IsDeleted).OrderBy(a => a.Name).ToList();
+            var authors = _context.Authors.OrderBy(a => a.Name).ToList();
+            var categories = _context.Categories.OrderBy(a => a.Name).ToList();
             viewModel.Authors = _mapper.Map<IEnumerable<SelectListItem>>(authors);
             viewModel.Categories = _mapper.Map<IEnumerable<SelectListItem>>(categories);
             return viewModel;

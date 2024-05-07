@@ -33,9 +33,6 @@ namespace Bookify.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime?>("LastUpdateOn")
                         .HasColumnType("datetime2");
 
@@ -49,7 +46,7 @@ namespace Bookify.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Authors", (string)null);
+                    b.ToTable("Authors");
                 });
 
             modelBuilder.Entity("Bookify.Core.Models.Book", b =>
@@ -81,9 +78,6 @@ namespace Bookify.Migrations
                     b.Property<bool>("IsAvailabelForRental")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime?>("LastUpdateOn")
                         .HasColumnType("datetime2");
 
@@ -107,7 +101,7 @@ namespace Bookify.Migrations
                     b.HasIndex("Title", "AuthorId")
                         .IsUnique();
 
-                    b.ToTable("Books", (string)null);
+                    b.ToTable("Books");
                 });
 
             modelBuilder.Entity("Bookify.Core.Models.BookCategory", b =>
@@ -122,7 +116,7 @@ namespace Bookify.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("BookCategories", (string)null);
+                    b.ToTable("BookCategories");
                 });
 
             modelBuilder.Entity("Bookify.Core.Models.Category", b =>
@@ -135,9 +129,6 @@ namespace Bookify.Migrations
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastUpdateOn")
                         .HasColumnType("datetime2");
@@ -152,7 +143,7 @@ namespace Bookify.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

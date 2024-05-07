@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bookify.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240503153339_InitialCreate")]
+    [Migration("20240507052556_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,9 +34,6 @@ namespace Bookify.Migrations
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastUpdateOn")
                         .HasColumnType("datetime2");
@@ -81,9 +78,6 @@ namespace Bookify.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsAvailabelForRental")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastUpdateOn")
@@ -137,9 +131,6 @@ namespace Bookify.Migrations
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastUpdateOn")
                         .HasColumnType("datetime2");

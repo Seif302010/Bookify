@@ -1,0 +1,49 @@
+@model dynamic
+@{
+    ViewBag.controllerName = ViewData["Title"]?.ToString()!;
+}
+<partial name="_HeaderCard.cshtml" />
+
+<div class="card shadow-sm">
+    <partial name="_Search&Export.cshtml" />
+    <div class="card-body pt-0">
+        @if (!((IEnumerable<dynamic>)Model).Any()){
+            <h1>No @ViewData["Title"] to show</h1>
+        }
+        else
+{
+            <div class="table-responsive">
+                <table class="table table-row-dashed table-row-gray-300 gy-7 js-datatables" data-document-title="Authors">
+                    <thead>
+                        <tr class="fw-bold fs-6 text-gray-800">
+                            <th>Name</th>
+                            <th>Created On</th>
+                            <th>Last Updated On</th>
+                            <th class="js-no-export">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model){
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.CreatedOn</td>
+                                <td class="js-update-on">@item.LastUpdateOn</td>
+                                <td>
+                                    <a class="btn btn-sm btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary"
+                                        asp-controller="@ViewBag.controllerName" asp-action="Edit" asp-route-id="@item.Id">
+                                        Edit
+                                    </a>
+                                    <a href="javascript:;"
+                                        class="btn btn-sm btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary js-delete-element"
+                                        data-id="@item.Id">
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>

@@ -1,69 +1,13 @@
 ﻿@model IEnumerable<AuthorViewModel>
 @{
-
-    ViewData["Title"] = "Author";
+    ViewData["Title"] = "Authors";
 }
 @section Styles {
     <link href="~/js/plugns/datatables/datatables.bundle.css" rel="stylesheet" />
 }
 
-<partial name="~/Views/PartialViews/_HeaderCard.cshtml" />
+<partial name="~/Views/PartialViews/_UnifiedPage.cshtml" />
 
-<div class="card shadow-sm">
-    <partial name="~/Views/PartialViews/_Search&Export.cshtml" />
-    <div class="card-body pt-0">
-        @if (!Model.Any())
-
-        {
-            <h1>No Authors to show</h1>
-        }
-
-        else
-
-        {
-            <div class="table-responsive">
-                <table class="table table-row-dashed table-row-gray-300 gy-7 js-datatables" data-document-title="Authors">
-                    <thead>
-                        <tr class="fw-bold fs-6 text-gray-800">
-                            <th>Name</th>
-                            <th>Status</th>
-                            <th>Created On</th>
-                            <th>Last Updated On</th>
-                            <th class="js-no-export">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var Author in Model)
-
-                        {
-                            <tr>
-                                <td>@Author.Name</td>
-                                <td>
-                                    <span class="badge badge-light-@(Author.IsDeleted ? "danger" : "success") js-status">
-                                        @(Author.IsDeleted ? "Deleted" : "Available")
-                                    </span>
-                                </td>
-                                <td>@Author.CreatedOn</td>
-                                <td class="js-update-on">@Author.LastUpdateOn</td>
-                                <td>
-                                    <a class="btn btn-sm btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary"
-                                        asp-controller="Authors" asp-action="Edit" asp-route-id="@Author.Id">
-                                        Edit
-                                    </a>
-                                    <a href="javascript:;"
-                                        class="btn btn-sm btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary js-toggle-status"
-                                        data-id="@Author.Id">
-                                        Delete
-                                    </a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        }
-    </div>
-</div>
 @section plugins {
     <script src="~/assets/plugins/datatables/datatables.bundle.js"></script>
 }
@@ -72,5 +16,8 @@
 
 {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        var pageTitle = "@ViewData["Title"]";
+    </script>
     <script src="~/js/util.js" asp-asp-append-version="true"></script>
 }

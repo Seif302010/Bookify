@@ -55,7 +55,6 @@ namespace Bookify.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastUpdateOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -71,7 +70,6 @@ namespace Bookify.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastUpdateOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -193,14 +191,13 @@ namespace Bookify.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    AuthorId = table.Column<int>(type: "int", nullable: false),
                     Publisher = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     PublishingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Hall = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     IsAvailabelForRental = table.Column<bool>(type: "bit", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    AuthorId = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastUpdateOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },

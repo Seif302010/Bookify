@@ -1,7 +1,3 @@
-@{
-    string controllerName = ViewData["Title"]?.ToString() == "Author" ? "Authors" : "Categories";
-}
-
 <div
     class="alert bg-light-primary border border-primary border-3 border-dashed d-flex justify-content-between w-100 p-5 mb-10">
     <div class="d-flex align-items-center">
@@ -28,7 +24,7 @@
         <!--end::Content-->
     </div>
     <div>
-        <a asp-controller="@controllerName" asp-action="Create" class="btn btn-sm btn-primary">
+        <a asp-controller="@ViewBag.controllerName" asp-action="Create" class="btn btn-sm btn-primary">
             Add
         </a>
     </div>

@@ -14,7 +14,6 @@
             {
                 Id = c.Id,
                 Name = c.Name,
-                IsDeleted = c.IsDeleted,
                 CreatedOn = c.CreatedOn,
                 LastUpdateOn = c.LastUpdateOn,
             }).AsNoTracking().ToList();
@@ -27,7 +26,7 @@
             return View("Form");
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult Create(CategoryFormViewModel model)
+        public IActionResult Create(UnifiedFormViewModel model)
         {
             if (!ModelState.IsValid)
                 return View("Form", model);
@@ -43,11 +42,10 @@
         {
             var category = _context.Categories.Find(id);
 
-
             if (category is null)
                 return NotFound();
 
-            var viewmodel = new CategoryFormViewModel
+            var viewmodel = new UnifiedFormViewModel
             {
                 Id = id,
                 Name = category.Name
@@ -56,7 +54,7 @@
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult Edit(CategoryFormViewModel model)
+        public IActionResult Edit(UnifiedFormViewModel model)
         {
             if (!ModelState.IsValid)
                 return View("Form", model);
@@ -66,7 +64,6 @@
 
             if (category is null)
                 return NotFound();
-
             category.Name = model.Name;
             category.LastUpdateOn = DateTime.Now;
 
@@ -76,20 +73,18 @@
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ToggleStatus(int id)
+        public IActionResult Delete(int id)
         {
             var category = _context.Categories.Find(id);
 
             if (category is null)
                 return NotFound();
 
-            category.IsDeleted = !category.IsDeleted;
-            category.LastUpdateOn = DateTime.Now;
+            _context.Remove(category);
             _context.SaveChanges();
-
-            return Ok(category.LastUpdateOn.ToString());
+            return Ok(category);
         }
-        public IActionResult Allowitem(CategoryFormViewModel model)
+        public IActionResult Allowitem(UnifiedFormViewModel model)
         {
             var isExists = _context.Categories.Any(c => c.Name == model.Name);
             return Json(!isExists);
