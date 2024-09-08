@@ -1,8 +1,8 @@
-It’s a website for borrowing Books.
+A website for borrowing books.
 
 • Included features:
 
-   – View Books by grid.
+   – View Books by a grid.
 
    –Search by all properties and sort by author name, category, or book name using the data-tables package.
 
